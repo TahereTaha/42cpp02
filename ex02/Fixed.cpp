@@ -6,13 +6,14 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:00:22 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/12 07:11:33 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/12 07:05:32 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
 #include <cmath>
+#include <bitset>
 
 //	constructors.
 Fixed::Fixed(void)
@@ -134,6 +135,91 @@ Fixed & Fixed::operator=(const Fixed & rhs)	// rhs is the thing to the right of 
 	return (*this);
 }
 
+//	some operator overloadings.
+
+bool	Fixed::operator > (const Fixed & src) const
+{
+	return (this->toFloat() > src.toFloat());
+}
+
+bool	Fixed::operator < (const Fixed & src) const
+{
+	return (this->toFloat() < src.toFloat());
+}
+
+bool	Fixed::operator >= (const Fixed & src) const
+{
+	return (this->toFloat() >= src.toFloat());
+}
+
+bool	Fixed::operator <= (const Fixed & src) const
+{
+	return (this->toFloat() <= src.toFloat());
+}
+
+bool	Fixed::operator == (const Fixed & src) const
+{
+	return (this->toFloat() == src.toFloat());
+}
+
+bool	Fixed::operator != (const Fixed & src) const
+{
+	return (this->toFloat() != src.toFloat());
+}
+
+Fixed	Fixed::operator + (const Fixed & src)
+{
+	Fixed	res(this->toFloat() + src.toFloat());
+	return (res);
+}
+
+Fixed	Fixed::operator - (const Fixed & src)
+{
+	Fixed	res(this->toFloat() - src.toFloat());
+	return (res);
+}
+
+Fixed	Fixed::operator * (const Fixed & src)
+{
+	Fixed	res(this->toFloat() * src.toFloat());
+	return (res);
+}
+
+Fixed	Fixed::operator / (const Fixed & src)
+{
+	Fixed	res(this->toFloat() / src.toFloat());
+	return (res);
+}
+
+Fixed & Fixed::operator ++ (void)
+{
+	this->setRawBits(this->getRawBits() + 1);
+	return (*this);
+}
+
+Fixed	Fixed::operator ++ (int)
+{
+	Fixed	ret(*this);
+
+	this->setRawBits(this->getRawBits() + 1);
+	return (ret);
+}
+
+Fixed & Fixed::operator -- (void)
+{
+	this->setRawBits(this->getRawBits() - 1);
+	return (*this);
+}
+
+Fixed	Fixed::operator -- (int)
+{
+	Fixed	ret(*this);
+
+	this->setRawBits(this->getRawBits() - 1);
+	return (ret);
+}
+
+
 //	methods.
 
 int	Fixed::toInt(void) const
@@ -178,10 +264,38 @@ void	Fixed::setRawBits(int const raw)
 	this->_fixedPointValue = raw;
 }
 
+Fixed & Fixed::min(Fixed & src1, Fixed & src2)
+{
+	if (src1 < src2)
+		return (src1);
+	return (src2);
+}
+
+const Fixed & Fixed::min(const Fixed & src1, const Fixed & src2)
+{
+	if (src1 < src2)
+		return (src1);
+	return (src2);
+}
+
+Fixed & Fixed::max(Fixed & src1, Fixed & src2)
+{
+	if (src1 > src2)
+		return (src1);
+	return (src2);
+}
+
+const Fixed & Fixed::max(const Fixed & src1, const Fixed & src2)
+{
+	if (src1 > src2)
+		return (src1);
+	return (src2);
+}
+
 //	overloading of the << to ostream.
 
-std::ostream & operator << (std::ostream &out_s, const Fixed &f)
+std::ostream & operator << (std::ostream &out_s, const Fixed &src)
 {
-	out_s << f.toFloat();
+	out_s << src.toFloat();
 	return (out_s);
 }
