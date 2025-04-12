@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:00:22 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/11 20:09:17 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/12 05:12:19 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,4 +169,12 @@ void	Fixed::setRawBits(int const raw)
 {
 //	std::cout << "setRawBits member function called." << std::endl;
 	this->_fixedPointValue = raw;
+}
+
+//	overloading of the << to ostream.
+
+std::ostream & operator << (std::ostream &out_s, const Fixed &f)
+{
+	out_s << f.toFloat();
+	return (out_s);
 }

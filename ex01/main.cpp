@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:24:52 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/11 20:03:17 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/12 05:12:07 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@
 //	return (0);
 //}
 
-int	main(void)
-{
-	Fixed a(-7.75f);
-
-	std::cout << std::bitset<sizeof(int) * 8>(a.getRawBits()) << std::endl;
-	std::cout << a.toFloat() << std::endl;
-	std::cout << a.toInt() << std::endl;
-}
+//int	main(void)
+//{
+//	Fixed a(-7.75f);
+//
+//	std::cout << std::bitset<sizeof(int) * 8>(a.getRawBits()) << std::endl;
+//	std::cout << a.toFloat() << std::endl;
+//	std::cout << a.toInt() << std::endl;
+//}
 
 //int		main()
 //{
@@ -59,4 +59,12 @@ int	main(void)
 //	std::cout << std::bitset<sizeof(int) * 8>(b.getRawBits()) << std::endl;
 //	return (0);
 //}
+
+int		main(void)
+{
+	Fixed	const a(-34.73f);
+
+	std::cout << a << std::endl;
+	return (0);
+}
 

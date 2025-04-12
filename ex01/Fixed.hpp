@@ -6,11 +6,13 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:31:19 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/11 20:01:06 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/12 05:10:41 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
+
+#include <iostream>
 
 class Fixed
 {
@@ -34,5 +36,7 @@ class Fixed
 		int		getRawBits(void) const ;
 		void	setRawBits(int const raw);
 };
+
+std::ostream & operator << (std::ostream &out_s, const Fixed &f);
 
 #endif
