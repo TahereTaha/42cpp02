@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:24:52 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/12 07:09:10 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:21:47 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,10 @@
 
 int		main(void)
 {
-	Fixed	a(1);
-	Fixed	b(-2.5f);
-	Fixed	c(40.25f);
+	Fixed	c(1020.25f);
 
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
 	std::cout << c << std::endl;
-	std::cout << "aaaaaaaaaa" << std::endl;
-	std::cout << (a + b) << std::endl;
-	std::cout << (c - a) << std::endl;
-	std::cout << (b * b) << std::endl;
-	std::cout << (c / b) << std::endl;
-	std::cout << Fixed::max(a, b) << std::endl;
-	std::cout << Fixed::min(a, b) << std::endl;
+	std::cout << c.toInt() << std::endl;
+	std::cout << c.toFloat() << std::endl;
 }
 

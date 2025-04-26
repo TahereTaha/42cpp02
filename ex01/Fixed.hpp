@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:31:19 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/12 05:10:41 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:36:21 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Fixed
 		~Fixed(void);
 		Fixed & operator=(const Fixed & src);
 
+		int		isNegative(void) const ;
 		int		toInt(void) const ;
 		float	toFloat(void) const ;
 		int		getRawBits(void) const ;

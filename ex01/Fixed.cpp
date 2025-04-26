@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:00:22 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/12 07:11:33 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:47:43 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,7 @@
 #include <iostream>
 #include <cmath>
 
-//	constructors.
-Fixed::Fixed(void)
-{
-//	std::cout << "Default constructor called." << std::endl;
-	this->_fixedPointValue = 0;
-}
-
-Fixed::Fixed(const Fixed & src)
-{
-//	std::cout << "Copy constructor called." << std::endl;
-	*this = src;	//	this is using the copy assigment
-}
-
-Fixed::Fixed(const int num)
-{
-	this->setRawBits(num << this->_fractionalBits);
-}
+//	some helper functions for doing bit manipulation.
 
 static float	get_value_on_index(const int index)
 {
@@ -55,6 +39,33 @@ static int	get_twos_complement(int num)
 	return (num);
 }
 
+static	int	get_mask(int bite_size)
+{
+	int	mask;
+
+	mask = (1 << bite_size) - 1;
+	return (mask);
+}
+
+
+//	constructors.
+Fixed::Fixed(void)
+{
+//	std::cout << "Default constructor called." << std::endl;
+	this->_fixedPointValue = 0;
+}
+
+Fixed::Fixed(const Fixed & src)
+{
+//	std::cout << "Copy constructor called." << std::endl;
+	*this = src;	//	this is using the copy assigment
+}
+
+Fixed::Fixed(const int num)
+{
+	this->setRawBits(num << this->_fractionalBits);
+}
+
 int	Fixed::get_integral_raw_bits(float integral, float fractional) const
 {
 	int	raw_bits;
@@ -64,14 +75,6 @@ int	Fixed::get_integral_raw_bits(float integral, float fractional) const
 	else
 		raw_bits = ((int)integral) << this->_fractionalBits;
 	return (raw_bits);
-}
-
-static	int	get_mask(int bite_size)
-{
-	int	mask;
-
-	mask = (1 << bite_size) - 1;
-	return (mask);
 }
 
 int	Fixed::get_fractional_raw_bits(float fractional) const
@@ -136,12 +139,19 @@ Fixed & Fixed::operator=(const Fixed & rhs)	// rhs is the thing to the right of 
 
 //	methods.
 
+int	Fixed::isNegative(void) const
+{
+	if (this->_fixedPointValue & (1 << (sizeof(this->_fixedPointValue) * 8 - 1)))
+		return (1);
+	return (0);
+}
+
 int	Fixed::toInt(void) const
 {
 	int	number;
 
 	number = this->_fixedPointValue >> this->_fractionalBits;
-	if (number & (1 << (this->_fractionalBits - 1)))
+	if (this->isNegative())
 		number |= ((int)-1) << (sizeof(this->_fixedPointValue) * 8 - this->_fractionalBits);
 	if (number < 0 && (0 != (this->_fixedPointValue << (sizeof(this->_fixedPointValue) * 8 - this->_fractionalBits))))
 		number++;
