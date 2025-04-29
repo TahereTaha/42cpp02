@@ -6,7 +6,7 @@
 /*   By: tatahere <tatahere@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:00:22 by tatahere          #+#    #+#             */
-/*   Updated: 2025/04/12 07:05:32 by tatahere         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:51:42 by tatahere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,12 +222,20 @@ Fixed	Fixed::operator -- (int)
 
 //	methods.
 
+int	Fixed::isNegative(void) const
+{
+	if (this->_fixedPointValue & (1 << (sizeof(this->_fixedPointValue) * 8 - 1)))
+		return (1);
+	return (0);
+}
+
 int	Fixed::toInt(void) const
 {
 	int	number;
 
 	number = this->_fixedPointValue >> this->_fractionalBits;
-	if (number & (1 << (this->_fractionalBits - 1)))
+	//	if (number & (1 << (this->_fractionalBits - 1))) the old way
+	if (this->isNegative())
 		number |= ((int)-1) << (sizeof(this->_fixedPointValue) * 8 - this->_fractionalBits);
 	if (number < 0 && (0 != (this->_fixedPointValue << (sizeof(this->_fixedPointValue) * 8 - this->_fractionalBits))))
 		number++;
